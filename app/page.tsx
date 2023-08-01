@@ -1,13 +1,23 @@
 "use client"
 import React, { useState } from 'react';
-
+import Image from 'next/image';
+import { IconCopy } from "@tabler/icons-react";
+import { IconSquareRoundedNumber1Filled, IconSquareRoundedNumber2Filled, IconSquareRoundedNumber3Filled } from "@tabler/icons-react";
 export default function Home() {
   const [coverLetter, setCoverLetter] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [extractedContent, setExtractedContent] = useState('');
 
-  const handleFileUpload = async (event) => {
+  const socialMediaLinks = [
+    { name: 'Instagram', icon: '/instagram-icon.svg', url: 'https://instagram.com/worqhat' },
+    { name: 'Discord', icon: '/discord-icon.svg', url: 'https://discord.gg/KHh9mguKBx' },
+    { name: 'LinkedIn', icon: '/linkedin-icon.svg', url: 'https://linkedin.com/company/worqhat' },
+    { name: 'Twitter', icon: '/twitter-icon.svg', url: 'https://twitter.com/worqhat' },
+    { name: 'GitHub', icon: '/github-icon.svg', url: 'https://github.com/worqhat' },
+  ];
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedFileName(file.name);
@@ -88,8 +98,19 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-full items-center justify-center p-5">
-      <div className="container h-4/5 my-1 bg-white rounded-md text-white p-10">
-        <h1 className="my-3 font-sans text-center text-4xl font-bold p-3 drop-shadow-lg bg-red-600">
+    <div className='logo' style={{ position: 'absolute', top: '0', left: '0', margin: '1%', fontSize: 'medium' }}>
+      <Image src="/logo.png" alt="Logo" width={100} height={50} />
+    </div>
+
+    <div className='social-icons' style={{ position: 'absolute', top: '0', right: '0', margin: '10px', fontSize: 'medium', display: 'flex' }}>
+      {socialMediaLinks.map((link, index) => (
+        <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" style={{ margin: '0 5px' }}>
+          <Image src={link.icon} alt={link.name} width={20} height={20} />
+        </a>
+      ))}
+    </div>
+      <div className="container h-50 my-1 bg-white rounded-md text-white p-10">
+        <h1 className="my-3 font-sans text-center text-4xl font-bold p-3 drop-shadow-lg bg-blue-600">
           Resume to cover letter
         </h1>
 
@@ -113,32 +134,29 @@ export default function Home() {
                 {uploadedFileName && <p>Uploaded File: {uploadedFileName}</p>}
               </div>
             </div>
-            {extractedContent && (
-              <div>
-                <button
-                  type="button"
-                  id="generate-button"
-                  className="btn bg-green-600 text-white px-4 py-2 m-1 w-72 mx-auto cursor-pointer rounded-md"
-                  disabled={!uploadedFileName || isLoading}
-                  onClick={generateCoverLetter}
-                >
-                  {isLoading ? 'Generating...' : 'Generate cover letter'}
-                </button>
-              </div>
-            )}
           </div>
+          <button
+            type="button"
+            id="generate-button"
+            className="btn bg-green-600 text-white px-4 py-2 m-1 w-72 mx-auto cursor-pointer rounded-md"
+            disabled={!uploadedFileName || isLoading || !extractedContent}
+            onClick={generateCoverLetter}
+          >
+            {isLoading ? 'Generating...' : 'Generate cover letter'}
+          </button>
         </div>
         <div className="cv bg-white h-64 rounded-md text-white p-5">
           <textarea
             className="border-2 text-black rounded-md w-full p-4 text-center drop-shadow-xl"
             id=""
-            cols="30"
-            rows="8"
             placeholder="Welcome to Resume to Cover Letter by Worqhat! Upload your resume and generate your cover letter."
             value={coverLetter}
             readOnly
           ></textarea>
         </div>
+      </div>
+      <div className='footer' style={{ textAlign: 'center', marginTop: '-45px', left: '0', bottom: '10px', width: '100%', color: 'black' }}>
+          <p>&copy; 2023 Worqhat. All rights reserved.</p>
       </div>
     </main>
   );
