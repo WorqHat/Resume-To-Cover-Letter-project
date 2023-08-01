@@ -98,7 +98,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-full items-center justify-center p-5">
-    <div className='logo' style={{ position: 'absolute', top: '0', left: '0', margin: '2%', fontSize: 'medium' }}>
+    <div className='logo' style={{ position: 'absolute', top: '0', left: '0', margin: '1%', fontSize: 'medium' }}>
       <Image src="/logo.png" alt="Logo" width={100} height={50} />
     </div>
 
