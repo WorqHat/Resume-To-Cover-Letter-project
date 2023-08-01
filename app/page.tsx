@@ -1,4 +1,3 @@
-"use client"
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -7,7 +6,7 @@ export default function Home() {
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [extractedContent, setExtractedContent] = useState('');
 
-  const handleFileUpload = async (event) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedFileName(file.name);
@@ -113,27 +112,21 @@ export default function Home() {
                 {uploadedFileName && <p>Uploaded File: {uploadedFileName}</p>}
               </div>
             </div>
-            {extractedContent && (
-              <div>
-                <button
-                  type="button"
-                  id="generate-button"
-                  className="btn bg-green-600 text-white px-4 py-2 m-1 w-72 mx-auto cursor-pointer rounded-md"
-                  disabled={!uploadedFileName || isLoading}
-                  onClick={generateCoverLetter}
-                >
-                  {isLoading ? 'Generating...' : 'Generate cover letter'}
-                </button>
-              </div>
-            )}
           </div>
+          <button
+            type="button"
+            id="generate-button"
+            className="btn bg-green-600 text-white px-4 py-2 m-1 w-72 mx-auto cursor-pointer rounded-md"
+            disabled={!uploadedFileName || isLoading || !extractedContent}
+            onClick={generateCoverLetter}
+          >
+            {isLoading ? 'Generating...' : 'Generate cover letter'}
+          </button>
         </div>
         <div className="cv bg-white h-64 rounded-md text-white p-5">
           <textarea
             className="border-2 text-black rounded-md w-full p-4 text-center drop-shadow-xl"
             id=""
-            cols="30"
-            rows="8"
             placeholder="Welcome to Resume to Cover Letter by Worqhat! Upload your resume and generate your cover letter."
             value={coverLetter}
             readOnly
