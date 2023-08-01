@@ -157,7 +157,7 @@ export default function Home() {
       </div>
       <div className='footer' style={{ textAlign: 'center', marginTop: '-45px', left: '0', bottom: '10px', width: '100%', color: 'black' }}>
           <p>&copy; 2023 Worqhat. All rights reserved.</p>
-        </div>
+      </div>
     </main>
   );
 }
