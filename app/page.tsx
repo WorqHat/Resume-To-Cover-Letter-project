@@ -8,7 +8,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [extractedContent, setExtractedContent] = useState('');
-
+ console.log(coverLetter);
   const socialMediaLinks = [
     { name: 'Instagram', icon: '/instagram-icon.svg', url: 'https://instagram.com/worqhat' },
     { name: 'Discord', icon: '/discord-icon.svg', url: 'https://discord.gg/KHh9mguKBx' },
@@ -32,7 +32,6 @@ export default function Home() {
           method: 'POST',
           headers: {
             Authorization: 'Bearer sk-48478981d5464a4e8e8389f873b0bb73',
-            'Content-Type': 'multi-part/form-data'
           },
           body: formData,
         });
@@ -41,9 +40,10 @@ export default function Home() {
         console.log(data);
 
         // Check if the content property exists in the API response
-        if (data.content) {
-          const extractedContent = data.content;
+        if (data.data) {
+          const extractedContent = data.data;
           setExtractedContent(extractedContent);
+
         } else {
           console.error('Error extracting content: Unexpected API response format');
         }
@@ -69,7 +69,6 @@ export default function Home() {
         method: 'POST',
         headers: {
           Authorization: 'Bearer sk-48478981d5464a4e8e8389f873b0bb73',
-          'Content-Type': 'application/json',
         },
         body: JSON.stringify(requestData),
       });
@@ -82,8 +81,8 @@ export default function Home() {
       console.log(data); // Optional: Log the API response data
 
       // Check if the content property exists in the API response
-      if (data.content) {
-        const generatedCoverLetter = data.content;
+      if (data.data) {
+        const generatedCoverLetter = data.data;
         setCoverLetter(generatedCoverLetter);
       } else {
         console.error('Error generating cover letter: Unexpected API response format');
