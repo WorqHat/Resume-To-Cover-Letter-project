@@ -25,14 +25,14 @@ export default function Home() {
 
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('output_format', 'text');
+      // formData.append('output_format', 'text');
 
       try {
         const response = await fetch('https://api.worqhat.com/api/ai/v2/pdf-extract', {
           method: 'POST',
           headers: {
-            'x-api-key': 'U2FsdGVkX187FPQxzgbmIVjXh3O1+xyor30KWVrIBMuFEqGv8NfzXPjE53e3Ju+T',
-            'x-org-key': 'U2FsdGVkX19lq3bhhF5TRouMiyL2HvEBD2V5j5nNl6dNL9JWPbsXW0rqlzssW8GieFki6oRVDKTb/z01Hc7m+Q==',
+            Authorization: 'Bearer sk-815f9a4836b44791b0b44ac4f4212842',
+            'Content-Type': 'multi-part/form-data'
           },
           body: formData,
         });
@@ -68,9 +68,8 @@ export default function Home() {
       const response = await fetch('https://api.worqhat.com/api/ai/content/v2', {
         method: 'POST',
         headers: {
+          Authorization: 'Bearer sk-815f9a4836b44791b0b44ac4f4212842',
           'Content-Type': 'application/json',
-          'x-api-key': 'U2FsdGVkX187FPQxzgbmIVjXh3O1+xyor30KWVrIBMuFEqGv8NfzXPjE53e3Ju+T',
-          'x-org-key': 'U2FsdGVkX19lq3bhhF5TRouMiyL2HvEBD2V5j5nNl6dNL9JWPbsXW0rqlzssW8GieFki6oRVDKTb/z01Hc7m+Q==',
         },
         body: JSON.stringify(requestData),
       });
