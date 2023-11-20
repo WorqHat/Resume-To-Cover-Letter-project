@@ -31,7 +31,7 @@ export default function Home() {
         const response = await fetch('https://api.worqhat.com/api/ai/v2/pdf-extract', {
           method: 'POST',
           headers: {
-            Authorization: 'Bearer sk-48478981d5464a4e8e8389f873b0bb73',
+            Authorization: 'Bearer sk-815f9a4836b44791b0b44ac4f4212842',
           },
           body: formData,
         });
@@ -68,7 +68,7 @@ export default function Home() {
       const response = await fetch('https://api.worqhat.com/api/ai/content/v2', {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer sk-48478981d5464a4e8e8389f873b0bb73',
+          Authorization: 'Bearer sk-815f9a4836b44791b0b44ac4f4212842',
         },
         body: JSON.stringify(requestData),
       });
