@@ -42,6 +42,7 @@ export default function Home() {
         // Check if the content property exists in the API response
         if (data.data) {
           const extractedContent = data.data;
+          console.log("test",extractedContent);
           setExtractedContent(extractedContent);
 
         } else {
@@ -59,16 +60,16 @@ export default function Home() {
     setIsLoading(true);
     try {
       const question = 'Generated a cover letter for the given extracted content';
-      const fullQuestion = `${extractedContent}\n\n${question}`;
+      const fullQuestion = `${question}\n\n${extractedContent}`;
+      console.log("fullquestion",fullQuestion);
       const requestData = {
         question: fullQuestion,
-        randomness: 0.4, // You can adjust the randomness factor as needed
       };
-
+      console.log("request data",requestData);
       const response = await fetch('https://api.worqhat.com/api/ai/content/v2', {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer sk-815f9a4836b44791b0b44ac4f4212842',
+          Authorization: 'Bearer sk-815f9a4836b44791b0b44ac4f4212842','Content-Type': 'application/json'
         },
         body: JSON.stringify(requestData),
       });
@@ -81,8 +82,9 @@ export default function Home() {
       console.log(data); // Optional: Log the API response data
 
       // Check if the content property exists in the API response
-      if (data.data) {
-        const generatedCoverLetter = data.data;
+      if (data.content) {
+        const generatedCoverLetter = data.content;
+        console.log("cover letter",generatedCoverLetter);
         setCoverLetter(generatedCoverLetter);
       } else {
         console.error('Error generating cover letter: Unexpected API response format');
@@ -143,9 +145,10 @@ export default function Home() {
             {isLoading ? 'Generating...' : 'Generate cover letter'}
           </button>
         </div>
+        
         <div className="cv bg-white h-64 rounded-md text-white p-5">
           <textarea
-            className="border-2 text-black rounded-md w-full p-4 text-center drop-shadow-xl"
+            className="border-2 text-black rounded-md w-full p-4 text-center drop-shadow-xl max-h-60 overflow-y-auto "
             id=""
             placeholder="Welcome to Resume to Cover Letter by Worqhat! Upload your resume and generate your cover letter."
             value={coverLetter}
