@@ -98,19 +98,48 @@ export default function Home() {
 
   return (
     <main className="flex flex-col h-full items-center justify-center p-5">
-    <div className='logo' style={{ position: 'absolute', top: '0', left: '0', margin: '1%', fontSize: 'medium' }}>
-      <Image src="/logo.png" alt="Logo" width={100} height={50} />
-    </div>
+      <div
+        className="logo"
+        style={{
+          position: "absolute",
+          top: "0",
+          left: "0",
+          margin: "1%",
+          fontSize: "medium",
+          marginBottom: "-10%"
+        }}
+      >
+        <Image src="/logo.png" alt="Logo" width={100} height={50} />
+      </div>
 
-    <div className='social-icons' style={{ position: 'absolute', top: '0', right: '0', margin: '10px', fontSize: 'medium', display: 'flex' }}>
-      {socialMediaLinks.map((link, index) => (
-        <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" style={{ margin: '0 5px' }}>
-          <Image src={link.icon} alt={link.name} width={20} height={20} />
-        </a>
-      ))}
-    </div>
+      <div
+        className="social-icons"
+        style={{
+          position: "absolute",
+          top: "0",
+          right: "0",
+          margin: "10px",
+          fontSize: "medium",
+          display: "flex",
+        }}
+      >
+        {socialMediaLinks.map((link, index) => (
+          <a
+            key={index}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ margin: "0 5px" }}
+          >
+            <Image src={link.icon} alt={link.name} width={20} height={20} />
+          </a>
+        ))}
+      </div>
       <div className="container h-50 my-1 bg-white rounded-md text-white p-10">
-        <h1 className="my-3 font-sans text-center text-4xl font-bold p-3 drop-shadow-lg bg-blue-600">
+        <h1
+          className="my-3 font-sans text-center text-4xl font-bold p-3 drop-shadow-lg "
+          style={{color: "black"}}
+        >
           Resume to cover letter
         </h1>
 
@@ -142,10 +171,10 @@ export default function Home() {
             disabled={!uploadedFileName || isLoading || !extractedContent}
             onClick={generateCoverLetter}
           >
-            {isLoading ? 'Generating...' : 'Generate cover letter'}
+            {isLoading ? "Generating..." : "Generate cover letter"}
           </button>
         </div>
-        
+
         <div className="cv bg-white h-64 rounded-md text-white p-5">
           <textarea
             className="border-2 text-black rounded-md w-full p-4 text-center drop-shadow-xl max-h-60 overflow-y-auto "
@@ -156,8 +185,29 @@ export default function Home() {
           ></textarea>
         </div>
       </div>
-      <div className='footer' style={{ textAlign: 'center', marginTop: '-45px', left: '0', bottom: '10px', width: '100%', color: 'black' }}>
-          <p>&copy; 2023 Worqhat. All rights reserved.</p>
+      <div
+        className="footer"
+        style={{
+          textAlign: "center",
+          marginTop: "-30px",
+          left: "0",
+          bottom: "10px",
+          width: "100%",
+          color: "black",
+        }}
+      >
+        <p>
+          &copy; 2023{" "}
+          <a
+            href="https://www.worqhat.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "blue" }}
+          >
+            Worqhat
+          </a>
+          . All rights reserved.
+        </p>
       </div>
     </main>
   );
